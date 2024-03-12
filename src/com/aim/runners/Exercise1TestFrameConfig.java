@@ -104,7 +104,7 @@ public class Exercise1TestFrameConfig extends TestFrameConfig {
 
 		switch (heuristicID) {
 			case 0:
-				heuristic = new DavissBitHC(random);
+				heuristic = new ShallowestDescentHC(random);
 				break;
 			case 1:
 				heuristic = new SteepestDescentHC(random);
