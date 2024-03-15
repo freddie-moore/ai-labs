@@ -16,7 +16,7 @@ public class Exercise2cTestFrameConfig extends TestFrameConfig {
 	 * You should perform some experiments adapting the list length to find a good performance.
 	 * Q - What is this equivalent to if using a list length of 1?
 	 */
-	protected final int LIST_LENGTH = 1;
+	protected final int LIST_LENGTH = 10;
 
 	private static final long m_parentSeed = 16022024L;
 

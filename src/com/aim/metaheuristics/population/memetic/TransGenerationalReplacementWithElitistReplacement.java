@@ -4,6 +4,9 @@ package com.aim.metaheuristics.population.memetic;
 import uk.ac.nott.cs.aim.domains.chesc2014_SAT.SAT;
 import uk.ac.nott.cs.aim.satheuristics.genetics.PopulationReplacement;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 public class TransGenerationalReplacementWithElitistReplacement extends PopulationReplacement {
 
 	/**
@@ -25,9 +28,32 @@ public class TransGenerationalReplacementWithElitistReplacement extends Populati
 	 */
 	@Override
 	protected int[] getNextGeneration(SAT oProblem, int iPopulationSize) {
-		
-		// TODO
-		return null;
+		double eval;
+		double bestEval = Double.MAX_VALUE;
+		double worstEval = Double.MIN_VALUE;
+		int bestIndex = -1;
+		int worstIndex = -1;
+
+		for(int i = 0; i<iPopulationSize*2; i++) {
+			eval = oProblem.getObjectiveFunctionValue(i);
+			if(eval < bestEval) {
+				bestEval = eval;
+				bestIndex = i;
+			}
+			if(eval > worstEval) {
+				worstEval = eval;
+				worstIndex = i;
+			}
+		}
+
+		int[] next_pop = IntStream.range(iPopulationSize, (iPopulationSize*2)).toArray();
+		if(bestIndex < iPopulationSize) {
+			if(0 < (worstIndex - iPopulationSize) && (worstIndex - iPopulationSize) < iPopulationSize ) {
+				next_pop[worstIndex - iPopulationSize] = bestIndex;
+			}
+		}
+
+		return next_pop;
 	}
 
 }

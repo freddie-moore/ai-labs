@@ -27,20 +27,20 @@ public class Exercise3aTestFrameConfig extends TestFrameConfig {
 	 * Permitted values for task 3: { Selection.TOURNAMENT }
 	 *
 	 */
-	protected final Selection P1_SELECTION = Selection.RANDOM;
+	protected final Selection P1_SELECTION = Selection.TOURNAMENT;
 
 	/**
 	 * Permitted values for task 2: { Selection.FITTEST }
 	 * Permitted values for task 3: { Selection.TOURNAMENT }
 	 *
 	 */
-	protected final Selection P2_SELECTION = Selection.FITTEST;
+	protected final Selection P2_SELECTION = Selection.TOURNAMENT;
 
 	/**
 	 * Permitted values for task 2: { Replacement.BASIC }
 	 * Permitted values for task 3: { Replacement.TRANS_GENERATIONAL }
 	 */
-	protected final Replacement REPLACEMENT = Replacement.BASIC;
+	protected final Replacement REPLACEMENT = Replacement.TRANS_GENERATIONAL;
 
 	/*
 	 * permitted total runs = 11

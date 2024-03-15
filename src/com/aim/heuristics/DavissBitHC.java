@@ -4,8 +4,13 @@ import uk.ac.nott.cs.aim.domains.chesc2014_SAT.SAT;
 import uk.ac.nott.cs.aim.helperfunctions.ArrayMethods;
 import uk.ac.nott.cs.aim.satheuristics.SATHeuristic;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
+
+import static java.util.Collections.shuffle;
 
 public class DavissBitHC extends SATHeuristic {
     
@@ -37,37 +42,31 @@ public class DavissBitHC extends SATHeuristic {
      */
     public void applyHeuristic(SAT problem) {
         double bestEval = problem.getObjectiveFunctionValue(CURRENT_SOLUTION_INDEX);
-        problem.createRandomSolution(CURRENT_SOLUTION_INDEX);
+        ArrayList<Integer> perm = createRandomPermutation(problem);
 
         for(int j = 0; j < problem.getNumberOfVariables(); j++) {
-            problem.bitFlip(j);
+            problem.bitFlip(perm.get(j));
             double tmpEval = problem.getObjectiveFunctionValue(CURRENT_SOLUTION_INDEX);
 
             if(tmpEval < bestEval) {
                 bestEval = tmpEval;
             } else {
-                problem.bitFlip(j);
+                problem.bitFlip(perm.get(j));
             }
         }
 
 
     }
 
-    public int[] createRandomPermutation(SAT problem) {
-        int[] perm = new int[problem.getNumberOfVariables()];
+    public ArrayList<Integer> createRandomPermutation(SAT problem) {
+        ArrayList<Integer> perm = new ArrayList<>();
 
         for(int i = 0; i < problem.getNumberOfVariables(); i++) {
-            perm[i] = i;
+            perm.add(i);
         }
 
-        for(int i = 0; i < problem.getNumberOfVariables()-1; i++)
-        {
-            int loc = random.nextInt(perm.length);
-            int tmp = perm[i];
-            perm[i] = perm[loc];
+        shuffle(perm, random);
 
-
-        }
         return perm;
     }
 
